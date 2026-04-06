@@ -1,66 +1,57 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { createClient } from '@/lib/supabase/server';
+import type { ContentMap } from '@/lib/types';
+import CustomCursor from '@/components/public/CustomCursor';
+import GrainOverlay from '@/components/public/GrainOverlay';
+import Navbar from '@/components/public/Navbar';
+import Hero from '@/components/public/Hero';
+import Ticker from '@/components/public/Ticker';
+import Stats from '@/components/public/Stats';
+import Ventures from '@/components/public/Ventures';
+import Philosophy from '@/components/public/Philosophy';
+import About from '@/components/public/About';
+import Team from '@/components/public/Team';
+import CtaBand from '@/components/public/CtaBand';
+import Contact from '@/components/public/Contact';
+import Footer from '@/components/public/Footer';
+import FloatingButtons from '@/components/public/FloatingButtons';
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const supabase = await createClient();
+
+  const [contentRes, venturesRes, teamRes, statsRes] = await Promise.all([
+    supabase.from('site_content').select('*'),
+    supabase.from('ventures').select('*').eq('is_active', true).order('display_order'),
+    supabase.from('team_members').select('*').eq('is_active', true).order('display_order'),
+    supabase.from('stats').select('*').order('display_order'),
+  ]);
+
+  const content: ContentMap = {};
+  (contentRes.data || []).forEach((row) => {
+    content[row.id] = row.value;
+  });
+
+  const ventures = venturesRes.data || [];
+  const teamMembers = teamRes.data || [];
+  const stats = statsRes.data || [];
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <CustomCursor />
+      <GrainOverlay />
+      <Navbar />
+      <Hero content={content} />
+      <Ticker />
+      <Stats stats={stats} />
+      <Ventures ventures={ventures} content={content} />
+      <Philosophy content={content} />
+      <About content={content} />
+      <Team members={teamMembers} content={content} />
+      <CtaBand content={content} />
+      <Contact content={content} teamMembers={teamMembers} ventures={ventures} />
+      <Footer content={content} ventures={ventures} />
+      <FloatingButtons />
+    </>
   );
 }

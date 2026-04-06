@@ -1,0 +1,71 @@
+export const DEFAULT_CONTENT: Record<string, string> = {
+  hero_eyebrow: 'A Modern Conglomerate',
+  hero_headline: 'House of H<em>.</em><br>Building <em>India\'s</em> Future.',
+  hero_sub: 'A diversified group building enduring ventures across fashion, real estate, and artificial intelligence \u2014 rooted in clarity, quality, and long-term thinking.',
+  hero_btn1_text: 'Explore Ventures',
+  hero_btn1_link: '#verticals',
+  hero_btn2_text: 'Get in Touch',
+  hero_btn2_link: '#contact',
+  hero_img_tag: 'Ammaar Fouzan \u2014 Founder',
+  ventures_eyebrow: 'Our Ventures',
+  ventures_heading: 'Three Verticals.<br>One Vision.',
+  ventures_desc: 'Each venture operates independently with its own identity, connected by shared values of quality, precision, and long-term thinking.',
+  philosophy_eyebrow: 'Our Philosophy',
+  philosophy_quote: '"We are not here to <em>participate</em>.<br>We are here to <em>build</em>."',
+  philosophy_attr: 'House of H. \u2014 Founded on Intent',
+  about_eyebrow: 'About the Group',
+  about_headline: 'A Modern Business Group Built to Last',
+  about_p1: 'House of H. is a diversified conglomerate focused on building and operating ventures across fashion, real estate, and artificial intelligence. Founded with clear intent \u2014 to create businesses that combine strong identity, operational excellence, and long-term scalability.',
+  about_p2: 'In a market where many companies are built for speed, House of H. focuses on depth \u2014 understanding industries from the ground up, building strong foundations, and scaling with structure.',
+  vision_text: 'To build a globally respected group of companies originating from India \u2014 known for clarity, quality, and long-term impact. House of H. is not built for short-term success. It is built to last.',
+  team_eyebrow: 'The People Behind H.',
+  team_heading: 'A Team Built on<br>Trust &amp; Execution',
+  team_desc: 'A small, focused team with clear roles and shared standards of excellence.',
+  contact_eyebrow: 'Get in Touch',
+  contact_heading: 'Let\'s Start<br>a Conversation',
+  contact_form_title: 'Send an Enquiry',
+  contact_form_sub: 'Share a few details and Ammaar will personally follow up within 24 hours.',
+  contact_privacy: 'Your details are kept strictly confidential. We respond within 24 hours.',
+  cta_heading: 'Ready to Build Something Together?',
+  cta_desc: 'Whether it is fashion, property, or technology \u2014 let us start with a conversation.',
+  footer_brand: 'House of H<span>.</span>',
+  footer_tagline: 'A modern conglomerate building enduring ventures across fashion, real estate, and artificial intelligence \u2014 founded on intent, built to last.',
+  footer_copyright: '\u00a9 2026 House of H. All rights reserved.',
+};
+
+export const GRADIENT_PRESETS = [
+  { name: 'Purple', value: 'linear-gradient(160deg,#2C2438 0%,#1A1520 100%)' },
+  { name: 'Navy', value: 'linear-gradient(160deg,#1C2B3A 0%,#0F1A26 100%)' },
+  { name: 'Forest', value: 'linear-gradient(160deg,#1A2818 0%,#0E1A0E 100%)' },
+  { name: 'Crimson', value: 'linear-gradient(160deg,#3A1C1C 0%,#261010 100%)' },
+  { name: 'Gold', value: 'linear-gradient(160deg,#3A2E1C 0%,#261E10 100%)' },
+  { name: 'Slate', value: 'linear-gradient(160deg,#2A2A2A 0%,#1A1A1A 100%)' },
+];
+
+export const DISPLAY_FONTS = [
+  { name: 'Cormorant Garamond', url: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap', fallback: 'Georgia, serif' },
+  { name: 'Playfair Display', url: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap', fallback: 'Georgia, serif' },
+  { name: 'DM Serif Display', url: 'https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap', fallback: 'Georgia, serif' },
+  { name: 'Lora', url: 'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&display=swap', fallback: 'Georgia, serif' },
+  { name: 'Libre Baskerville', url: 'https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap', fallback: 'Georgia, serif' },
+  { name: 'Fraunces', url: 'https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&display=swap', fallback: 'Georgia, serif' },
+];
+
+export const BODY_FONTS = [
+  { name: 'Manrope', url: 'https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap', fallback: '-apple-system, sans-serif' },
+  { name: 'DM Sans', url: 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap', fallback: '-apple-system, sans-serif' },
+  { name: 'Nunito Sans', url: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap', fallback: '-apple-system, sans-serif' },
+  { name: 'Outfit', url: 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap', fallback: '-apple-system, sans-serif' },
+];
+
+export const DEFAULT_COLORS: Record<string, string> = {
+  '--color-bg': '#FAF8F5',
+  '--color-bg-warm': '#F3EDE6',
+  '--color-bg-dark': '#0D0C0A',
+  '--color-accent': '#B8935A',
+  '--color-accent-hover': '#A07D45',
+  '--color-accent-light': '#D4BC8E',
+  '--color-text': '#1A1714',
+  '--color-text-muted': '#6B6560',
+  '--color-border': '#E5DED5',
+};
