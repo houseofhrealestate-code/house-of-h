@@ -1,6 +1,6 @@
 export const DEFAULT_CONTENT: Record<string, string> = {
   hero_eyebrow: 'A Modern Conglomerate',
-  hero_headline: 'House of H<em>.</em><br>Building <em>India\'s</em> Future.',
+  hero_headline: 'House of H<em>.</em>',
   hero_sub: 'A diversified group building enduring ventures across fashion, real estate, and artificial intelligence \u2014 rooted in clarity, quality, and long-term thinking.',
   hero_btn1_text: 'Explore Ventures',
   hero_btn1_link: '#verticals',
