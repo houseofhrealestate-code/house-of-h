@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server';
+import { createPublicClient } from '@/lib/supabase/public';
 import type { ContentMap } from '@/lib/types';
 import { DEFAULT_CONTENT } from '@/lib/constants';
 import CustomCursor from '@/components/public/CustomCursor';
@@ -25,7 +25,7 @@ export default async function HomePage() {
   let stats: any[] = [];
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const [contentRes, venturesRes, teamRes, statsRes] = await Promise.all([
       supabase.from('site_content').select('*'),
       supabase.from('ventures').select('*').eq('is_active', true).order('display_order'),
