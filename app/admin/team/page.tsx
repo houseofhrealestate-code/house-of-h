@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useToast } from '@/components/admin/Toast';
+import { uploadImage } from '@/lib/storage';
 import type { TeamMember } from '@/lib/types';
 
 export default function TeamPage() {
@@ -9,6 +10,8 @@ export default function TeamPage() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState({ name: '', role: '', bio: '', phone: '', whatsapp: '', email: '', image_url: '', initials: '', initials_bg: '' });
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
   const { flash } = useToast();
 
   useEffect(() => { load(); }, []);
@@ -39,6 +42,21 @@ export default function TeamPage() {
     setEditingId(m.id);
     setForm({ name: m.name, role: m.role, bio: m.bio, phone: m.phone, whatsapp: m.whatsapp, email: m.email, image_url: m.image_url, initials: m.initials, initials_bg: m.initials_bg });
     setShowForm(true);
+  }
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const url = await uploadImage(file, 'team');
+      setForm((f) => ({ ...f, image_url: url }));
+      flash('Photo uploaded');
+    } catch (err: any) {
+      flash(err.message || 'Upload failed', 'error');
+    } finally {
+      setUploading(false);
+    }
   }
 
   async function save() {
@@ -127,8 +145,22 @@ export default function TeamPage() {
             <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
           </div>
           <div className="form-group">
-            <label>Photo URL</label>
-            <input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="Cloudinary URL or /images/filename.jpg" />
+            <label>Photo</label>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <input
+                value={form.image_url}
+                onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+                placeholder="Paste URL or upload below"
+                style={{ flex: 1, minWidth: 200 }}
+              />
+              <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
+              <button type="button" className="save-btn secondary" onClick={() => fileRef.current?.click()} disabled={uploading}>
+                {uploading ? 'Uploading...' : 'Upload Photo'}
+              </button>
+            </div>
+            {form.image_url && (
+              <img src={form.image_url} alt="Preview" style={{ marginTop: '0.5rem', width: 60, height: 60, borderRadius: '50%', objectFit: 'cover', border: '2px solid #2E2A24' }} />
+            )}
           </div>
           <div className="form-row">
             <div className="form-group">

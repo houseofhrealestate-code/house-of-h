@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useToast } from '@/components/admin/Toast';
+import { uploadImage } from '@/lib/storage';
 import { GRADIENT_PRESETS } from '@/lib/constants';
 import type { Venture } from '@/lib/types';
 
@@ -10,6 +11,8 @@ export default function VenturesPage() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState({ title: '', badge: '', subtitle: '', description: '', button_text: 'Learn More', button_link: '#contact', bg_gradient: GRADIENT_PRESETS[0].value, image_url: '', pattern_style: '', pattern_size: '' });
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
   const { flash } = useToast();
 
   useEffect(() => { load(); }, []);
@@ -66,6 +69,21 @@ export default function VenturesPage() {
     await supabase.from('ventures').update({ is_active: !v.is_active }).eq('id', v.id);
     await load();
     await revalidate();
+  }
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const url = await uploadImage(file, 'ventures');
+      setForm((f) => ({ ...f, image_url: url }));
+      flash('Image uploaded');
+    } catch (err: any) {
+      flash(err.message || 'Upload failed', 'error');
+    } finally {
+      setUploading(false);
+    }
   }
 
   async function move(id: string, dir: -1 | 1) {
@@ -131,8 +149,17 @@ export default function VenturesPage() {
             </div>
           </div>
           <div className="form-group">
-            <label>Image URL</label>
-            <input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="Cloudinary URL or leave empty" />
+            <label>Image</label>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} placeholder="Paste URL or upload" style={{ flex: 1, minWidth: 200 }} />
+              <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
+              <button type="button" className="save-btn secondary" onClick={() => fileRef.current?.click()} disabled={uploading}>
+                {uploading ? 'Uploading...' : 'Upload Image'}
+              </button>
+            </div>
+            {form.image_url && (
+              <img src={form.image_url} alt="Preview" style={{ marginTop: '0.5rem', height: 60, borderRadius: 4, objectFit: 'cover', border: '2px solid #2E2A24' }} />
+            )}
           </div>
           <div className="form-row">
             <div className="form-group">

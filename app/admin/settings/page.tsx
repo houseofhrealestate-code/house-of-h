@@ -6,8 +6,6 @@ import { useToast } from '@/components/admin/Toast';
 export default function SettingsPage() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [cloudName, setCloudName] = useState('');
-  const [uploadPreset, setUploadPreset] = useState('');
   const { flash } = useToast();
 
   async function changePassword() {
@@ -17,12 +15,6 @@ export default function SettingsPage() {
     const { error } = await supabase.auth.updateUser({ password: newPassword });
     if (error) flash(error.message, 'error');
     else { flash('Password updated'); setNewPassword(''); setConfirmPassword(''); }
-  }
-
-  async function saveCloudinary() {
-    const supabase = createClient();
-    await supabase.from('site_settings').upsert({ key: 'cloudinary', value: { cloudName, uploadPreset }, updated_at: new Date().toISOString() });
-    flash('Cloudinary settings saved');
   }
 
   async function deleteAllSubmissions() {
@@ -73,19 +65,10 @@ export default function SettingsPage() {
       </div>
 
       <div className="settings-section">
-        <h3>Cloudinary Setup</h3>
-        <p style={{ marginBottom: '1rem' }}>Enable direct image uploads for ventures and team photos. Sign up at cloudinary.com and create an unsigned upload preset.</p>
-        <div className="form-row" style={{ maxWidth: 500 }}>
-          <div className="form-group">
-            <label style={{ fontSize: '.62rem', fontWeight: 700, letterSpacing: '.16em', textTransform: 'uppercase' as const, color: '#5A5349', marginBottom: '.5rem', display: 'block' }}>Cloud Name</label>
-            <input value={cloudName} onChange={(e) => setCloudName(e.target.value)} style={{ background: '#1C1916', border: '1px solid #2E2A24', color: '#EDE7DD', padding: '.75rem 1rem', borderRadius: 4, outline: 'none', width: '100%', fontFamily: "'Manrope', sans-serif", fontSize: '.85rem' }} />
-          </div>
-          <div className="form-group">
-            <label style={{ fontSize: '.62rem', fontWeight: 700, letterSpacing: '.16em', textTransform: 'uppercase' as const, color: '#5A5349', marginBottom: '.5rem', display: 'block' }}>Upload Preset</label>
-            <input value={uploadPreset} onChange={(e) => setUploadPreset(e.target.value)} style={{ background: '#1C1916', border: '1px solid #2E2A24', color: '#EDE7DD', padding: '.75rem 1rem', borderRadius: 4, outline: 'none', width: '100%', fontFamily: "'Manrope', sans-serif", fontSize: '.85rem' }} />
-          </div>
-        </div>
-        <button className="save-btn mt-1" onClick={saveCloudinary}>Save</button>
+        <h3>Image Storage</h3>
+        <p style={{ color: '#5A5349', fontSize: '.85rem', lineHeight: 1.6 }}>
+          Images are stored in <strong style={{ color: '#C49B5A' }}>Supabase Storage</strong> — no extra setup needed. Use the <strong style={{ color: '#EDE7DD' }}>Upload Photo / Upload Image</strong> buttons in the Team and Ventures pages to upload directly.
+        </p>
       </div>
 
       <div className="settings-section">
