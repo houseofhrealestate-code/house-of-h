@@ -19,7 +19,7 @@ export default function LoginPage() {
     const email = username.includes('@') ? username : `${username}@houseofh.com`;
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
-      setError('Invalid credentials');
+      setError(error.message);
       setLoading(false);
     } else {
       router.push('/admin/submissions');
