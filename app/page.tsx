@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import type { ContentMap } from '@/lib/types';
+import { DEFAULT_CONTENT } from '@/lib/constants';
 import CustomCursor from '@/components/public/CustomCursor';
 import GrainOverlay from '@/components/public/GrainOverlay';
 import Navbar from '@/components/public/Navbar';
@@ -18,23 +19,29 @@ import FloatingButtons from '@/components/public/FloatingButtons';
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const supabase = await createClient();
+  let content: ContentMap = { ...DEFAULT_CONTENT };
+  let ventures: any[] = [];
+  let teamMembers: any[] = [];
+  let stats: any[] = [];
 
-  const [contentRes, venturesRes, teamRes, statsRes] = await Promise.all([
-    supabase.from('site_content').select('*'),
-    supabase.from('ventures').select('*').eq('is_active', true).order('display_order'),
-    supabase.from('team_members').select('*').eq('is_active', true).order('display_order'),
-    supabase.from('stats').select('*').order('display_order'),
-  ]);
+  try {
+    const supabase = await createClient();
+    const [contentRes, venturesRes, teamRes, statsRes] = await Promise.all([
+      supabase.from('site_content').select('*'),
+      supabase.from('ventures').select('*').eq('is_active', true).order('display_order'),
+      supabase.from('team_members').select('*').eq('is_active', true).order('display_order'),
+      supabase.from('stats').select('*').order('display_order'),
+    ]);
 
-  const content: ContentMap = {};
-  (contentRes.data || []).forEach((row) => {
-    content[row.id] = row.value;
-  });
-
-  const ventures = venturesRes.data || [];
-  const teamMembers = teamRes.data || [];
-  const stats = statsRes.data || [];
+    (contentRes.data || []).forEach((row) => {
+      content[row.id] = row.value;
+    });
+    ventures = venturesRes.data || [];
+    teamMembers = teamRes.data || [];
+    stats = statsRes.data || [];
+  } catch (e) {
+    console.error('Supabase fetch failed:', e);
+  }
 
   return (
     <>
