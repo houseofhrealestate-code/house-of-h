@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
@@ -15,11 +14,15 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
     setLoading(true);
-    const supabase = createClient();
     const email = username.includes('@') ? username : `${username}@houseofh.com`;
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      setError(error.message);
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      setError(data.error || 'Login failed');
       setLoading(false);
     } else {
       router.push('/admin/submissions');
