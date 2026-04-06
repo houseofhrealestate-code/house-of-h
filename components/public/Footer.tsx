@@ -20,6 +20,7 @@ export default function Footer({ content, ventures }: Props) {
             {ventures.map((v) => (
               <li key={v.id}><a href="#verticals">{v.title}</a></li>
             ))}
+            <li><a href="/houseofh">Real Estate Portfolio</a></li>
           </ul>
         </div>
         <div className="footer__col">

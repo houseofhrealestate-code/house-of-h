@@ -11,6 +11,10 @@ const NAV_ITEMS = [
     { href: '/admin/ventures', label: 'Ventures', icon: 'M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z' },
     { href: '/admin/team', label: 'Team', icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75' },
   ]},
+  { group: 'REAL ESTATE', items: [
+    { href: '/admin/properties', label: 'Properties', icon: 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z' },
+    { href: '/admin/re-content', label: 'RE Content', icon: 'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z' },
+  ]},
   { group: 'CUSTOMIZE', items: [
     { href: '/admin/content', label: 'Content', icon: 'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z' },
     { href: '/admin/design', label: 'Design & Fonts', icon: 'M12 2.69l5.66 5.66a8 8 0 11-11.31 0z' },

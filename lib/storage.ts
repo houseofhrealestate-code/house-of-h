@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/client';
 
-export async function uploadImage(file: File, folder: 'team' | 'ventures'): Promise<string> {
+export async function uploadImage(file: File, folder: 'team' | 'ventures' | 'properties' | 're'): Promise<string> {
   const supabase = createClient();
   const ext = file.name.split('.').pop() || 'jpg';
   const filename = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;

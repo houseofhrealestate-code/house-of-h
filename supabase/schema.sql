@@ -175,3 +175,76 @@ INSERT INTO site_settings (key, value) VALUES
 ('display_font', '{"name": "Cormorant Garamond", "url": ""}'),
 ('body_font', '{"name": "Manrope", "url": ""}'),
 ('cloudinary', '{"cloudName": "", "uploadPreset": ""}');
+
+-- =============================================
+-- Real Estate Sub-Site
+-- =============================================
+
+-- RE Content (key-value text pairs for /houseofh page)
+CREATE TABLE re_content (
+  id TEXT PRIMARY KEY,
+  value TEXT NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- RE Properties
+CREATE TABLE re_properties (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  location TEXT DEFAULT '',
+  price TEXT DEFAULT '',
+  type TEXT DEFAULT 'Commercial',
+  area_sqft INT DEFAULT 0,
+  bedrooms INT DEFAULT 0,
+  bathrooms INT DEFAULT 0,
+  description TEXT DEFAULT '',
+  image_url TEXT DEFAULT '',
+  is_featured BOOLEAN DEFAULT false,
+  is_active BOOLEAN DEFAULT true,
+  display_order INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- RLS
+ALTER TABLE re_content ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Public read" ON re_content FOR SELECT USING (true);
+CREATE POLICY "Admin write" ON re_content FOR ALL USING (auth.role() = 'authenticated');
+
+ALTER TABLE re_properties ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Public read" ON re_properties FOR SELECT USING (true);
+CREATE POLICY "Admin write" ON re_properties FOR ALL USING (auth.role() = 'authenticated');
+
+-- RE Content Seed Data
+INSERT INTO re_content (id, value) VALUES
+('re_hero_headline', 'Premium Real Estate,<br><em>Redefined.</em>'),
+('re_hero_subtitle', 'Commercial leasing, acquisitions, and institutional transactions — powered by a deal-first mindset.'),
+('re_hero_cta_text', 'View Properties'),
+('re_hero_cta_link', '#properties'),
+('re_hero_image', ''),
+('re_properties_eyebrow', 'Our Portfolio'),
+('re_properties_heading', 'Featured Properties'),
+('re_properties_subheading', 'Explore our curated selection of premium commercial and residential properties across India.'),
+('re_stats_1_number', '50'),
+('re_stats_1_suffix', '+'),
+('re_stats_1_label', 'Properties Managed'),
+('re_stats_2_number', '120'),
+('re_stats_2_suffix', 'Cr+'),
+('re_stats_2_label', 'Portfolio Value'),
+('re_stats_3_number', '15'),
+('re_stats_3_suffix', '+'),
+('re_stats_3_label', 'Cities Covered'),
+('re_about_eyebrow', 'About Our Real Estate Division'),
+('re_about_heading', 'Deal-First Mindset,<br>Premium Outcomes.'),
+('re_about_text', 'House of H. Real Estate specializes in commercial leasing, acquisitions, and institutional transactions. We prioritize outcomes over activity — identifying high-value opportunities and executing with precision.'),
+('re_cta_heading', 'Looking for the Right Property?'),
+('re_cta_text', 'Whether you are exploring commercial spaces, residential investments, or land acquisitions — let us find the perfect deal for you.'),
+('re_cta_button_text', 'Get in Touch'),
+('re_cta_button_link', '/#contact'),
+('re_footer_text', '© 2026 House of H. Real Estate. All rights reserved.');
+
+-- RE Properties Seed Data
+INSERT INTO re_properties (title, location, price, type, area_sqft, bedrooms, bathrooms, description, image_url, is_featured, display_order) VALUES
+('Brigade Gateway', 'Rajajinagar, Bangalore', '2.4 Cr', 'Commercial', 3200, 0, 2, 'Prime commercial office space in the heart of Bangalore with modern amenities and excellent connectivity.', '', true, 1),
+('Prestige Lakeside', 'Whitefield, Bangalore', '1.8 Cr', 'Residential', 2400, 3, 3, 'Luxury 3BHK apartment overlooking the lake with premium finishes and a world-class clubhouse.', '', false, 2),
+('Embassy Business Park', 'Outer Ring Road, Bangalore', 'On Request', 'Commercial', 5000, 0, 4, 'Grade-A commercial space in one of Bangalore''s most sought-after business parks.', '', true, 3);

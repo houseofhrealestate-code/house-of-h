@@ -69,3 +69,33 @@ export const DEFAULT_COLORS: Record<string, string> = {
   '--color-text-muted': '#6B6560',
   '--color-border': '#E5DED5',
 };
+
+export const RE_PROPERTY_TYPES = ['Commercial', 'Residential', 'Land'] as const;
+
+export const DEFAULT_RE_CONTENT: Record<string, string> = {
+  re_hero_headline: 'Premium Real Estate,<br><em>Redefined.</em>',
+  re_hero_subtitle: 'Commercial leasing, acquisitions, and institutional transactions \u2014 powered by a deal-first mindset.',
+  re_hero_cta_text: 'View Properties',
+  re_hero_cta_link: '#properties',
+  re_hero_image: '',
+  re_properties_eyebrow: 'Our Portfolio',
+  re_properties_heading: 'Featured Properties',
+  re_properties_subheading: 'Explore our curated selection of premium commercial and residential properties across India.',
+  re_stats_1_number: '50',
+  re_stats_1_suffix: '+',
+  re_stats_1_label: 'Properties Managed',
+  re_stats_2_number: '120',
+  re_stats_2_suffix: 'Cr+',
+  re_stats_2_label: 'Portfolio Value',
+  re_stats_3_number: '15',
+  re_stats_3_suffix: '+',
+  re_stats_3_label: 'Cities Covered',
+  re_about_eyebrow: 'About Our Real Estate Division',
+  re_about_heading: 'Deal-First Mindset,<br>Premium Outcomes.',
+  re_about_text: 'House of H. Real Estate specializes in commercial leasing, acquisitions, and institutional transactions. We prioritize outcomes over activity \u2014 identifying high-value opportunities and executing with precision.',
+  re_cta_heading: 'Looking for the Right Property?',
+  re_cta_text: 'Whether you are exploring commercial spaces, residential investments, or land acquisitions \u2014 let us find the perfect deal for you.',
+  re_cta_button_text: 'Get in Touch',
+  re_cta_button_link: '/#contact',
+  re_footer_text: '\u00a9 2026 House of H. Real Estate. All rights reserved.',
+};

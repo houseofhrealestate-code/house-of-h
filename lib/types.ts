@@ -65,4 +65,22 @@ export interface SiteSetting {
   updated_at: string;
 }
 
+export interface REProperty {
+  id: string;
+  title: string;
+  location: string;
+  price: string;
+  type: string;
+  area_sqft: number;
+  bedrooms: number;
+  bathrooms: number;
+  description: string;
+  image_url: string;
+  is_featured: boolean;
+  is_active: boolean;
+  display_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export type ContentMap = Record<string, string>;

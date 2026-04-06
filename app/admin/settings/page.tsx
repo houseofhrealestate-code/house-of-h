@@ -26,14 +26,16 @@ export default function SettingsPage() {
 
   async function exportData() {
     const supabase = createClient();
-    const [c, v, t, s, st] = await Promise.all([
+    const [c, v, t, s, st, rc, rp] = await Promise.all([
       supabase.from('site_content').select('*'),
       supabase.from('ventures').select('*'),
       supabase.from('team_members').select('*'),
       supabase.from('stats').select('*'),
       supabase.from('site_settings').select('*'),
+      supabase.from('re_content').select('*'),
+      supabase.from('re_properties').select('*'),
     ]);
-    const data = { site_content: c.data, ventures: v.data, team_members: t.data, stats: s.data, site_settings: st.data };
+    const data = { site_content: c.data, ventures: v.data, team_members: t.data, stats: s.data, site_settings: st.data, re_content: rc.data, re_properties: rp.data };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
