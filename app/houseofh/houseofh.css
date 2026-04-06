@@ -474,6 +474,194 @@
 }
 
 /* ============================================
+   CONTACT
+   ============================================ */
+.re-contact {
+  background: #ffffff;
+  padding: 6rem 0;
+  border-top: 1px solid #e8e4df;
+}
+
+.re-contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.re-contact__heading {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.re-contact__desc {
+  font-size: 0.95rem;
+  color: #6b6560;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.re-contact__details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.re-contact__detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.re-contact__detail svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: #b8935a;
+}
+.re-contact__detail div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.re-contact__detail span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6b6560;
+}
+.re-contact__detail a {
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.re-contact__detail a:hover {
+  color: #b8935a;
+}
+
+.re-contact__form-wrap {
+  background: #f8f7f5;
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid #e8e4df;
+}
+
+.re-contact__form-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 0.35rem;
+}
+
+.re-contact__form-sub {
+  font-size: 0.85rem;
+  color: #6b6560;
+  margin-bottom: 1.75rem;
+  line-height: 1.5;
+}
+
+.re-contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.re-contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.re-contact__field label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #6b6560;
+}
+
+.re-contact__field input,
+.re-contact__field textarea {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #e0dbd5;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.re-contact__field input:focus,
+.re-contact__field textarea:focus {
+  border-color: #b8935a;
+}
+
+.re-contact__field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.re-contact__submit {
+  width: 100%;
+  padding: 1rem;
+  background: #b8935a;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 0.5rem;
+}
+.re-contact__submit:hover {
+  background: #a07d45;
+  transform: translateY(-1px);
+}
+.re-contact__submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.re-contact__privacy {
+  font-size: 0.72rem;
+  color: #9a9490;
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+.re-contact__success {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.re-contact__success svg {
+  margin-bottom: 1rem;
+}
+.re-contact__success h4 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+.re-contact__success p {
+  font-size: 0.9rem;
+  color: #6b6560;
+}
+
+/* ============================================
    FOOTER
    ============================================ */
 .re-footer {
@@ -515,6 +703,11 @@
   .re-about__grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .re-contact__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 }
 
@@ -566,6 +759,22 @@
 
   .re-cta__heading {
     font-size: 1.8rem;
+  }
+
+  .re-contact {
+    padding: 4rem 0;
+  }
+
+  .re-contact__heading {
+    font-size: 1.8rem;
+  }
+
+  .re-contact__row {
+    grid-template-columns: 1fr;
+  }
+
+  .re-contact__form-wrap {
+    padding: 1.75rem;
   }
 
   .re-footer__inner {

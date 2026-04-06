@@ -7,6 +7,7 @@ import REStats from '@/components/houseofh/REStats';
 import REProperties from '@/components/houseofh/REProperties';
 import REAbout from '@/components/houseofh/REAbout';
 import RECTA from '@/components/houseofh/RECTA';
+import REContact from '@/components/houseofh/REContact';
 import REFooter from '@/components/houseofh/REFooter';
 
 export const revalidate = 60;
@@ -47,6 +48,7 @@ export default async function HouseOfHPage() {
       <REProperties properties={properties} content={content} />
       <REAbout content={content} />
       <RECTA content={content} />
+      <REContact />
       <REFooter content={content} />
     </div>
   );
