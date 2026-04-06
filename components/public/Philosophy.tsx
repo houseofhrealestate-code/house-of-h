@@ -9,7 +9,7 @@ export default function Philosophy({ content }: { content: ContentMap }) {
         <span className="philosophy__eyebrow">{content.philosophy_eyebrow}</span>
       </ScrollReveal>
       <ScrollReveal delay={0.1}>
-        <blockquote dangerouslySetInnerHTML={{ __html: content.philosophy_quote }} />
+        <blockquote dangerouslySetInnerHTML={{ __html: content.philosophy_quote || '' }} />
       </ScrollReveal>
       <ScrollReveal delay={0.2}>
         <div className="philosophy__line" />

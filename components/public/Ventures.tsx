@@ -60,7 +60,7 @@ export default function Ventures({ ventures, content }: { ventures: Venture[]; c
       <ScrollReveal>
         <div className="section-header">
           <span className="eyebrow">{content.ventures_eyebrow}</span>
-          <h2 dangerouslySetInnerHTML={{ __html: content.ventures_heading }} />
+          <h2 dangerouslySetInnerHTML={{ __html: content.ventures_heading || '' }} />
           <p>{content.ventures_desc}</p>
         </div>
       </ScrollReveal>

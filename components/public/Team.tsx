@@ -9,7 +9,7 @@ export default function Team({ members, content }: { members: TeamMember[]; cont
       <ScrollReveal>
         <div className="section-header">
           <span className="eyebrow">{content.team_eyebrow}</span>
-          <h2 dangerouslySetInnerHTML={{ __html: content.team_heading }} />
+          <h2 dangerouslySetInnerHTML={{ __html: content.team_heading || '' }} />
           <p>{content.team_desc}</p>
         </div>
       </ScrollReveal>

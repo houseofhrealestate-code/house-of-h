@@ -11,7 +11,7 @@ export default function Footer({ content, ventures }: Props) {
     <footer className="footer">
       <div className="footer__top">
         <div className="footer__brand">
-          <div className="footer__brand-name" dangerouslySetInnerHTML={{ __html: content.footer_brand }} />
+          <div className="footer__brand-name" dangerouslySetInnerHTML={{ __html: content.footer_brand || '' }} />
           <p>{content.footer_tagline}</p>
         </div>
         <div className="footer__col">

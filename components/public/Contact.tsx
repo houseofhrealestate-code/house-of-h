@@ -43,7 +43,7 @@ export default function Contact({ content, teamMembers, ventures }: Props) {
         <ScrollReveal direction="left">
           <div className="contact__left">
             <span className="eyebrow">{content.contact_eyebrow}</span>
-            <h2 dangerouslySetInnerHTML={{ __html: content.contact_heading }} />
+            <h2 dangerouslySetInnerHTML={{ __html: content.contact_heading || '' }} />
             <div className="contact__divider" />
             <p>Whether you are exploring a partnership, a property, or simply want to know more about our ventures — reach out. We respond within 24 hours.</p>
             <div className="contact__details">

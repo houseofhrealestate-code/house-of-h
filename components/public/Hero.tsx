@@ -9,7 +9,7 @@ export default function Hero({ content }: Props) {
     <section className="hero" id="home">
       <div className="hero__left">
         <div className="hero__eyebrow">{content.hero_eyebrow}</div>
-        <h1 dangerouslySetInnerHTML={{ __html: content.hero_headline }} />
+        <h1 dangerouslySetInnerHTML={{ __html: content.hero_headline || '' }} />
         <p className="hero__sub">{content.hero_sub}</p>
         <div className="hero__actions">
           <a href={content.hero_btn1_link} className="btn btn--primary">{content.hero_btn1_text}</a>
